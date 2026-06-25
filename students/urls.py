@@ -30,5 +30,5 @@ urlpatterns += [
         "dashboard/",
         StudentDashboardAPIView.as_view()
     ),
-    path("create_student", CreateStudentAPIView)
+    path("create/", CreateStudentAPIView.as_view(), name="student-create"),
 ]

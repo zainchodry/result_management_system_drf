@@ -53,21 +53,21 @@ class Student(BaseModel):
         default="ACTIVE"
     )
 
-    guardian_name = models.CharField(
-        max_length=255
+    cgpa = models.DecimalField(  # Added: was missing but referenced in results/views.py
+        max_digits=4,
+        decimal_places=2,
+        default=0.00
     )
 
-    guardian_phone = models.CharField(
-        max_length=20
-    )
+    guardian_name = models.CharField(max_length=255)
 
-    emergency_contact = models.CharField(
-        max_length=20
-    )
+    guardian_phone = models.CharField(max_length=20)
+
+    emergency_contact = models.CharField(max_length=20)
 
     def __str__(self):
         return self.roll_number
-    
+
 
 class StudentSemesterHistory(BaseModel):
 
@@ -87,6 +87,7 @@ class StudentSemesterHistory(BaseModel):
     class Meta:
         ordering = ["semester__semester_no"]
 
+
 class StudentDocument(BaseModel):
 
     student = models.ForeignKey(
@@ -95,11 +96,6 @@ class StudentDocument(BaseModel):
         related_name="documents"
     )
 
-    title = models.CharField(
-        max_length=255
-    )
+    title = models.CharField(max_length=255)
 
-    file = models.FileField(
-        upload_to="student_documents/"
-    )
-
+    file = models.FileField(upload_to="student_documents/")
